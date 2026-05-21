@@ -188,7 +188,7 @@ function RecordingContent() {
       if (audioContext.state === 'suspended') await audioContext.resume()
       console.log('[AI Judge] Step 3: AudioContext ready ✓ state:', audioContext.state)
 
-      const speechModel = setupRef.current?.language === 'english' ? 'nano' : 'whisper-rt'
+      const speechModel = setupRef.current?.language === 'english' ? 'u3-rt-pro' : 'whisper-rt'
       const wsUrl = `wss://streaming.assemblyai.com/v3/ws?sample_rate=16000&token=${tokenData.token}&speaker_labels=true&speech_model=${speechModel}`
       console.log(`[AI Judge] Step 4: Opening WebSocket (speech_model=${speechModel})...`)
       const ws = new WebSocket(wsUrl)
