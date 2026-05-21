@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-navy-950 text-white min-h-screen;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-navy-900 border border-navy-700 rounded-2xl p-6;
+  }
+
+  .card-gold {
+    @apply bg-navy-900 border border-gold-600/40 rounded-2xl p-6;
+  }
+
+  .btn-primary {
+    @apply bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold py-3 px-8 rounded-xl
+           transition-all duration-200 shadow-lg hover:shadow-gold-500/25 active:scale-95
+           text-lg disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply bg-navy-800 hover:bg-navy-700 text-white font-semibold py-2.5 px-6 rounded-xl
+           transition-all duration-200 border border-navy-600 hover:border-navy-500 active:scale-95;
+  }
+
+  .input-field {
+    @apply bg-navy-800 border border-navy-600 rounded-xl px-4 py-3 text-white placeholder-navy-400
+           focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500/50
+           transition-all duration-200 w-full;
+  }
+
+  .section-label {
+    @apply text-gold-400 text-sm font-semibold uppercase tracking-widest mb-2;
+  }
+
+  .verdict-card {
+    @apply bg-navy-900/80 border border-navy-700 rounded-2xl p-6 shadow-xl animate-slide-up;
+  }
+}
+
+/* Pulsing mic ring animation */
+@keyframes mic-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 24px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+.mic-pulsing {
+  animation: mic-pulse 1.5s ease-out infinite;
+}
+
+/* ── Print / PDF styles ──────────────────────────────────────────────────── */
+@media print {
+  @page {
+    margin: 1.8cm 2cm;
+    size: A4;
+  }
+
+  /* Reset dark theme to white paper */
+  html,
+  body {
+    background: white !important;
+    color: #111827 !important;
+  }
+
+  /* Hide chrome: nav, buttons, share section */
+  header,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Verdict cards → clean white boxes */
+  .verdict-card,
+  .card,
+  .card-gold {
+    background: white !important;
+    border: 1px solid #d1d5db !important;
+    box-shadow: none !important;
+    border-radius: 8px !important;
+    page-break-inside: avoid;
+  }
+
+  /* Section labels */
+  .section-label {
+    color: #6b7280 !important;
+    border-bottom: 1px solid #f3f4f6;
+    padding-bottom: 4px;
+  }
+
+  /* Generic text overrides */
+  .text-white     { color: #111827 !important; }
+  .text-navy-200  { color: #1f2937 !important; }
+  .text-navy-300  { color: #374151 !important; }
+  .text-navy-400,
+  .text-navy-500  { color: #9ca3af !important; }
+
+  /* Score bar track */
+  .print-score-track {
+    background: #f3f4f6 !important;
+  }
+
+  /* Keep score fill colors (browsers print backgrounds when user allows) */
+  /* If backgrounds are disabled, the numeric score labels still show */
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-navy-900;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-navy-600 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-navy-500;
+}
